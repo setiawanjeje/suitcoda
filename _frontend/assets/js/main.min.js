@@ -282,7 +282,7 @@
                     $defaultCont.removeClass('projects--hide');
                 } else {
                     // call API to generate search result
-                    // send parameter : keyword
+                    // ex: suitcoda.com/search=keyword
 
                     $.ajax({
                         url: 'search-result.php',
@@ -292,6 +292,7 @@
                     .done(function(data) {
                         $defaultCont.addClass('projects--hide'); 
                         $searchCont.removeClass('projects--hide'); 
+                        $searchCont.addClass('projects-search--done'); 
                         $searchCont.empty();
                         $(data).appendTo('.projects-search');
                     })

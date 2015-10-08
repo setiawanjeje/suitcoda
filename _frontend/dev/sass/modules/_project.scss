@@ -3,6 +3,20 @@
     display: block;
 }
 
+.projects-search {
+    background: url(../../assets/img/loading.gif) no-repeat;
+    background-position: center;
+    background-size: 70px;
+
+    @media #{$medium} {
+        background-size: 150px;
+    }
+}
+
+.projects-search--done {
+    background: none;
+}
+
 .projects--hide {
     display: none;
 }

@@ -1218,6 +1218,17 @@ a.box {
 .projects-default {
   display: block; }
 
+.projects-search {
+  background: url(../../assets/img/loading.gif) no-repeat;
+  background-position: center;
+  background-size: 70px; }
+  @media screen and (min-width: 40em) {
+    .projects-search {
+      background-size: 150px; } }
+
+.projects-search--done {
+  background: none; }
+
 .projects--hide {
   display: none; }
 
