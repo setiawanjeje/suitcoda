@@ -34,6 +34,7 @@
             Site.syntaxHighlighter();
             Site.showIssueCode();
             Site.validateForm();
+            Site.searchProject();
 
             window.Site = Site;
         },
@@ -264,6 +265,41 @@
                 }
             ]);
 
+        },
+
+        searchProject: function () {
+            var $form       = $('form.search'),
+                $defaultCont= $('.projects-default'),
+                $searchCont = $('.projects-search');
+
+            $form.submit(function(e) {
+                e.preventDefault();
+
+                var keyword = $('.search__input').val();
+
+                if ( keyword === '' ) {
+                    $searchCont.addClass('projects--hide');
+                    $defaultCont.removeClass('projects--hide');
+                } else {
+                    // call API to generate search result
+                    // send parameter : keyword
+
+                    $.ajax({
+                        url: 'search-result.php',
+                        type: 'GET',
+                        dataType: 'html'
+                    })
+                    .done(function(data) {
+                        $defaultCont.addClass('projects--hide'); 
+                        $searchCont.removeClass('projects--hide'); 
+                        $searchCont.empty();
+                        $(data).appendTo('.projects-search');
+                    })
+                    .fail(function() {})
+                    .always(function() {});
+                }
+
+            });
         }
 
     };

@@ -1215,6 +1215,12 @@ a.box {
 .user-avatar + ul:before {
   right: 15px; }
 
+.projects-default {
+  display: block; }
+
+.projects--hide {
+  display: none; }
+
 .project-nav {
   width: 100%;
   display: block;
