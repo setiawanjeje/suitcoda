@@ -4,11 +4,12 @@
         <?php include '_include/header.php'; ?>
 
         <main class="main site-content">
-            <div class="bg-grey">
+            <div class="bg-grey block">
                 <div class="container">
                     <form class="search" action="">
-                        <label for="search-project" class="search__label"><span class="fa fa-search"></span></label>
-                        <input id="search-project" class="search__input form-input" type="text" placeholder="search...">
+                        <span class="fa fa-search"></span>
+                        <label for="search-project" class="search__label sr-only">Search Project : </label>
+                        <input id="search-project" class="search__input form-input" type="text" placeholder="search project...">
                     </form>
                 </div>
             </div>

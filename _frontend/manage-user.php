@@ -4,7 +4,17 @@
         <?php include '_include/header.php'; ?>
 
         <main class="main site-content block-up">
-            <div class="container">
+            <div class="bg-grey block">
+                <div class="container">
+                    <form class="search" action="">
+                        <span class="fa fa-search"></span>
+                        <label for="search-user" class="search__label sr-only">Search User : </label>
+                        <input id="search-user" class="search__input form-input" type="text" placeholder="search user...">
+                    </form>
+                </div>
+            </div>
+
+            <div class="container block-up">
                 <h1 class="title">Manage User</h1>
                 <div class="bzg">
                     <div class="bzg_c" data-col="s12,m6,l4">

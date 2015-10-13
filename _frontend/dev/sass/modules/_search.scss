@@ -2,6 +2,12 @@
     position: relative;
 }
 
+.search .fa {
+    position: absolute;
+    top: 11px;
+    left: 0;
+}
+
 .search__input {
     padding-left: 20px;
     width: 100%;
@@ -11,7 +17,4 @@
 }
 
 .search__label {
-    position: absolute;
-    top: 7px;
-    left: 0;
 }
