@@ -1,5 +1,6 @@
 var horsemanOpt = {
-    webSecurity : false
+    webSecurity : false,
+    timeout     : 60000
 };
 
 // ------------------------- dependency -------------------------
@@ -12,26 +13,26 @@ var Horseman    = require('node-horseman'),
     domain      = require('domain').create();
 
 domain.on('error', function(er) {
-    console.error('caught an error : ' + er.message );
+    console.error('domain caught error : ' + er.message );
     horseman.close();
     process.exit(1);
 });
 
 // --------------------------- get url ---------------------------
 program
-.version('0.0.1')
-.option('-u, --url [url]', 'Input URL')
-.option('-d, --destination [path]', 'Input Path to Store The Output')
-.option('--title',      'Include Title Tag Checker')
-.option('--header',     'Include Header Tag Checker')
-.option('--footer',     'Include Footer Tag Checker')
-.option('--favicon',    'Include Favicon Checker')
-.option('--aria',       'Include ARIA Landmark Checker')
-.option('--noalt',      'Include No Alternate Text on Image Tag Checker')
-.option('--i18n',       'Include Internationalization (i18n) Checker')
-.option('--meta',       'Include Necessary Meta Tag Checker')
-.option('--heading',    'Include Heading Tag Checker')
-.parse(process.argv);
+    .version('0.0.1')
+    .option('-u, --url [url]', 'Input URL')
+    .option('-d, --destination [path]', 'Input Path to Store The Output')
+    .option('--title',      'Include Title Tag Checker')
+    .option('--header',     'Include Header Tag Checker')
+    .option('--footer',     'Include Footer Tag Checker')
+    .option('--favicon',    'Include Favicon Checker')
+    .option('--aria',       'Include ARIA Landmark Checker')
+    .option('--noalt',      'Include No Alternate Text on Image Tag Checker')
+    .option('--i18n',       'Include Internationalization (i18n) Checker')
+    .option('--meta',       'Include Necessary Meta Tag Checker')
+    .option('--heading',    'Include Heading Tag Checker')
+    .parse(process.argv);
 
 var url = program.url;
 var dest; 
@@ -54,18 +55,23 @@ var error   = 'Error',
     errDesc,
     counter = 0;
 
+horseman.on('loadFinished', function (status) {
+    console.log('load finished!');
+    console.log(status);
+});
+
+horseman.on('error', function (msg, trace) {
+    console.log('on error!');
+    console.log(msg);
+});
 
 domain.run(function () {
     try {
-        var openUrl = horseman.open(url).on('loadFinished', function (status) {
-            console.log('load finished!');
-            console.log(status);
-        });
+        horseman.open(url);
     } catch (e) {
         console.log("error found!");
         console.log(e);
     }
-
 });
 
 fs.exists(program.destination, function (exists) {
