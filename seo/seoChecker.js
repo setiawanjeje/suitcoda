@@ -1,10 +1,21 @@
+var horsemanOpt = {
+    webSecurity : false
+};
+
 // ------------------------- dependency -------------------------
 var Horseman    = require('node-horseman'),
-    horseman    = new Horseman(),
+    horseman    = new Horseman(horsemanOpt),
     fs          = require('fs-extra'),
     isUrl       = require('is-url'),
     jsonPretty  = require('json-pretty'),
-    program     = require('commander');
+    program     = require('commander'),
+    domain      = require('domain').create();
+
+domain.on('error', function(er) {
+    console.error('caught an error : ' + er.message );
+    horseman.close();
+    process.exit(1);
+});
 
 // --------------------------- get url ---------------------------
 program
@@ -43,7 +54,19 @@ var error   = 'Error',
     errDesc,
     counter = 0;
 
-var openUrl = horseman.open(url);
+
+domain.run(function () {
+    try {
+        var openUrl = horseman.open(url).on('loadFinished', function (status) {
+            console.log('load finished!');
+            console.log(status);
+        });
+    } catch (e) {
+        console.log("error found!");
+        console.log(e);
+    }
+
+});
 
 fs.exists(program.destination, function (exists) {
     if ( !exists ) {
